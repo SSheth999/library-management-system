@@ -21,118 +21,13 @@ A complete CRUD (Create, Read, Update, Delete) web application for managing libr
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed on your machine:
+Before you view the application, ensure you have the following installed on your machine:
 
 - [Docker](https://www.docker.com/get-started) (version 20.10 or later)
 - [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0 or later)
 - [Git](https://git-scm.com/downloads)
 - [Composer](https://getcomposer.org/download/) (optional, for local development)
 
-## Setup Instructions
-
-### Step 1: Clone the Repository
-
-```bash
-git clone <your-repository-url>
-cd SSheth999
-```
-
-### Step 2: Configure Environment Variables
-
-1. Copy the `.env.example` file to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. The `.env` file is already configured for Docker. If you need to modify database settings:
-   ```env
-   database.default.hostname = db
-   database.default.database = library_db
-   database.default.username = library_user
-   database.default.password = library_password
-   ```
-
-### Step 3: Build and Start Docker Containers
-
-```bash
-docker-compose up -d --build
-```
-
-This command will:
-- Build the PHP/Apache web server container
-- Start the MySQL database container
-- Set up the network between containers
-- Expose the application on `http://localhost:8080`
-
-### Step 4: Install PHP Dependencies
-
-Access the web container and install Composer dependencies:
-
-```bash
-docker-compose exec web composer install
-```
-
-Or if running locally (without Docker):
-
-```bash
-composer install
-```
-
-### Step 5: Run Database Migrations
-
-Execute the migration to create the `books` table:
-
-```bash
-docker-compose exec web php spark migrate
-```
-
-Or locally:
-
-```bash
-php spark migrate
-```
-
-### Step 6: Set Permissions (if needed)
-
-Ensure the uploads directory is writable:
-
-```bash
-docker-compose exec web chmod -R 777 public/uploads
-```
-
-Or locally:
-
-```bash
-chmod -R 777 public/uploads
-```
-
-### Step 7: Create Placeholder Image
-
-If the placeholder image wasn't created automatically, run:
-
-```bash
-docker-compose exec web php create_placeholder.php
-```
-
-Or locally:
-
-```bash
-php create_placeholder.php
-```
-
-### Step 8: Access the Application
-
-Open your web browser and navigate to:
-
-```
-http://localhost:8080
-```
-
-You should see the "List of Books" page. From here, you can:
-- Click "Add New Book" to create a book record
-- View all existing books in a table
-- Edit any book by clicking the "Edit" button
-- Delete any book by clicking the "Delete" button (with confirmation)
 
 ## Project Structure
 
@@ -201,32 +96,6 @@ SSheth999/
 2. Confirm the deletion in the dialog box
 3. The book and its associated image will be removed
 4. You'll see a success message
-
-## Docker Commands Reference
-
-```bash
-# Start containers
-docker-compose up -d
-
-# Stop containers
-docker-compose down
-
-# View logs
-docker-compose logs -f web
-docker-compose logs -f db
-
-# Access web container shell
-docker-compose exec web bash
-
-# Access database
-docker-compose exec db mysql -u library_user -p library_db
-
-# Rebuild containers
-docker-compose up -d --build
-
-# Stop and remove volumes (cleans database)
-docker-compose down -v
-```
 
 ## Development & Design Decisions
 
