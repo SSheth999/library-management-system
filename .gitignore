@@ -1,0 +1,40 @@
+# Environment files
+.env
+.env.local
+
+# Composer
+/vendor/
+composer.phar
+composer.lock
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+writable/logs/*
+!writable/logs/index.html
+
+# Cache
+writable/cache/*
+!writable/cache/index.html
+writable/session/*
+!writable/session/index.html
+writable/debugbar/*
+!writable/debugbar/index.html
+
+# Uploads (keep structure, ignore files)
+public/uploads/books/*
+!public/uploads/books/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+
